@@ -13,8 +13,8 @@ public class MainApplication {
 		System.out.println("reading " + path + "...");
 		int[][] array = new FileReader(path).readSudFile();
 		SudokuSolver solver = new SudokuSolver( array );
-//		System.out.println(array[3][1]); //array[y][x]
-		System.out.println(solver.estValide(3, 8, 9));
+//		System.out.println(array[6][5]); //array[y][x]
+//		System.out.println(solver.estValide(6, 6, 8));
 
 	}
 

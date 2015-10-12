@@ -28,8 +28,9 @@ public class SudokuSolver {
 			}
 		}
 		
-		for(int i=(x/3)*3; i<(x/3)*3+3; i++){
+		for(int i=(y/3)*3; i<(y/3)*3+3; i++){
 			for(int j=(x/3)*3; j<(x/3)*3+3; j++){
+//				System.out.println(i+" "+j + " " + array[i][j]);
 				if(i != y && j != x && array[i][j] == valeur){
 					result = false;
 				}
