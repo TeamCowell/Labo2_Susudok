@@ -3,11 +3,56 @@ public class SudokuSolver {
 
 	int[][] array = new int[9][9];
 
+
 	public SudokuSolver(int[][] array){
 		this.array = array;
 	}
-
 	/**
+	 * Methode qui retourne vrai si le sudoku est solutionner
+	 * sinon , il retourne faux
+	 * @param array
+	 * @param cell
+	 */
+	public boolean solve(Cellule cell)
+	{
+		//si la cellule est null, nous somme a la fin de la grille
+		//selon la methode getProchaineCellulle
+		if(cell == null){
+			return true;
+		}
+		//Va la prochaine cellule, s'il y a deja une valeur
+		if(array[cell.ligne][cell.colonne] !=0){
+			return solve(getProchaineCellule(cell));
+		}
+		
+		
+		for(int i = 1; i<=9;i++){
+			
+			boolean numValide = this.estValide(cell, i);
+			//System.out.println("NUMERO VALIDE = "+numValide);
+			if(numValide == false){
+				continue;
+			}
+			
+			//on assigne la valeur
+			array[cell.ligne][cell.colonne] = i;
+
+			// on continue a solutionner
+			boolean solved = this.solve(getProchaineCellule(cell));
+			
+			// if solved, return, else try other values
+			   if (solved){
+			    return true;
+			   }
+			   else{
+			    array[cell.ligne][cell.colonne] = 0; // backtrack
+			   }
+			   // on essaye une autre valeur
+		}
+		return false; // lorsqu'il est impossible de solutionner
+	}
+
+/**
 	 * 
 	 * @param x est la position en x sur la table (0..8)
 	 * @param y est la position en y sur la table (0..8)
@@ -58,15 +103,10 @@ public class SudokuSolver {
 
 		boolean result = true;
 
-		// si il a deja un nombre
-		if (array[cell.ligne][cell.colonne] != 0) {
-			throw new RuntimeException(
-					"Il y a deja un nombre a cette position");
-		}
-
 		for(int i=0; i<9; i++){
 			//detection lignes
 			if( array[cell.ligne][i] == valeur){
+				
 				result = false;
 			}
 			//detection colonne
@@ -85,8 +125,7 @@ public class SudokuSolver {
 			}
 		}
 
-
-		return true;
+		return result;
 	}
 	
 	/**
@@ -96,8 +135,8 @@ public class SudokuSolver {
 	 */
 	public Cellule getProchaineCellule(Cellule cell){
 		  int ligne = cell.ligne;
-		  int colonne = cell.colonne++; // prochainne colonne
-
+		  int colonne = cell.colonne; 
+		  colonne++;// prochainne colonne
 		  // si la colonne >8 alors colonne = 0 
 		  //et ligne ++
 		  if (colonne > 8) {
