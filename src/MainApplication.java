@@ -11,7 +11,10 @@ public class MainApplication {
 		System.out.println("Enter .sud file path:");
 		String path = br.readLine();
 		System.out.println("reading " + path + "...");
-		new FileReader(path).readSudFile();
+		int[][] array = new FileReader(path).readSudFile();
+		SudokuSolver solver = new SudokuSolver( array );
+//		System.out.println(array[3][1]); //array[y][x]
+		System.out.println(solver.estValide(3, 8, 9));
 
 	}
 
