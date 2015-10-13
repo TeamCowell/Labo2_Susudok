@@ -13,6 +13,32 @@ public class MainApplication {
 		System.out.println("reading " + path + "...");
 		int[][] array = new FileReader(path).readSudFile();
 		SudokuSolver solver = new SudokuSolver( array );
+		
+		
+		for (int i = 0; i < 9; i++) {
+			   for (int j = 0; j < 9; j++){
+			    System.out.print(solver.array[i][j]);
+			   }
+			   System.out.println();
+			  }
+		System.out.println(solver.estValide(3,0,3));
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		long startTime = System.nanoTime();
+		solver.solve(0, 0);
+		long endTime = System.nanoTime();
+
+		long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
+		
+		
+		for (int i = 0; i < 9; i++) {
+			   for (int j = 0; j < 9; j++)
+			    System.out.print(solver.array[i][j]);
+			   System.out.println();
+			  }
+		System.out.println(duration/1000000+" ms");
 //		System.out.println(array[6][5]); //array[y][x]
 //		System.out.println(solver.estValide(6, 6, 8));
 
