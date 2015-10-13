@@ -27,7 +27,9 @@ public class MainApplication {
 		System.out.println();
 		System.out.println();
 		long startTime = System.nanoTime();
-		solver.solve(0, 0);
+		if(!solver.solve(0, 0)){
+			System.out.println("Le sudoku n'a pas de solution.");
+		}
 		long endTime = System.nanoTime();
 
 		long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
