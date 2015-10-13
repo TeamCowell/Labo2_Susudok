@@ -16,7 +16,10 @@ public class MainApplication {
 		int[][] array = new FileReader(path).readSudFile();
 		SudokuSolver solver = new SudokuSolver(array);
 		System.out.println("LOADING SOLUTION...");
+		long startTime = System.nanoTime();
 		boolean solutionner = solver.solve(new Cellule(0,0));
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
 		
 		if(solutionner == true){
 			System.out.println("LE SUDOKU A ETE SOLUTIONNER!");
@@ -30,6 +33,7 @@ public class MainApplication {
 			   }
 			   System.out.println();
 			  }
+		System.out.println(duration/1000000+" ms");
 //		System.out.println(array[6][5]); //array[y][x]
 //		System.out.println(solver.estValide(6, 7, 8));
 
